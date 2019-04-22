@@ -1,5 +1,6 @@
 package searchTree_05;
-public class binaryTree_02 {
+
+public class practice_02 {
 
 	static class Node {
 		int value;
@@ -59,32 +60,30 @@ public class binaryTree_02 {
 	}
 
 	static class BinaryTree {
-		Node root;
+		Node dummy=new Node(Integer.MAX_VALUE);
 
 		public void add(int value) {
-			if (root != null) root.add(value);
-			else root = new Node(value);
+			if (dummy.left != null) dummy.left.add(value);
+			else dummy.left = new Node(value);
 		}	
 
 		public void print() {
-			if (root != null) root.print();
+			if (dummy.left != null) dummy.left.print();
 			System.out.println();
 		}
 
 		public boolean contains(int value) {
-			return root != null && root.contains(value);
+			return dummy.left != null && dummy.left.contains(value);
 		}
 
 		public void remove(int value) {
-			Node dummy=new Node(Integer.MAX_VALUE);
-			dummy.left = root;
-			root.remove(value, dummy);
-			if (dummy.left != root) root = dummy.left;
+			if (dummy.left != null) 
+				dummy.left.remove(value, dummy);
 		}
 
 		public void remove2(int value) {
-			if(value == root.value && root.left == null || root.right==null) {
-				root.remove(value, null);
+			if(value == dummy.left.value && dummy.left.left == null || dummy.left.right==null) {
+				dummy.left.remove(value, null);
 			}
 		}
 	}
@@ -99,6 +98,7 @@ public class binaryTree_02 {
 		binaryTree.remove(15);
 		binaryTree.remove(5);
 		binaryTree.remove(10);
+		binaryTree.print();
 		System.out.println();
 	}
 }

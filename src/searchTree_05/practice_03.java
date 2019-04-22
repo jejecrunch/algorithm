@@ -1,5 +1,6 @@
 package searchTree_05;
-public class binaryTree_02 {
+
+public class practice_03 {
 
 	static class Node {
 		int value;
@@ -76,17 +77,21 @@ public class binaryTree_02 {
 		}
 
 		public void remove(int value) {
-			Node dummy=new Node(Integer.MAX_VALUE);
-			dummy.left = root;
-			root.remove(value, dummy);
-			if (dummy.left != root) root = dummy.left;
+			if(root==null) return;
+			else if(root.value==value) {
+				if(root.left!=null && root.right!=null) {
+					int temp=root.right.getLeftMostValue();
+					root.value=temp;
+					root.right.remove(temp, root);
+				} else {
+					Node child = (root.left != null) ? root.left : root.right;
+					root=child;
+				}
+			} 
+			else
+				root.remove(value, null);
 		}
 
-		public void remove2(int value) {
-			if(value == root.value && root.left == null || root.right==null) {
-				root.remove(value, null);
-			}
-		}
 	}
 
 	public static void main(String[] args) {
@@ -96,9 +101,13 @@ public class binaryTree_02 {
 			binaryTree.add(a[i]);
 		binaryTree.print();
 		binaryTree.remove(14);
+		binaryTree.print();
 		binaryTree.remove(15);
+		binaryTree.print();
 		binaryTree.remove(5);
+		binaryTree.print();
 		binaryTree.remove(10);
+		binaryTree.print();
 		System.out.println();
 	}
 }
