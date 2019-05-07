@@ -5,6 +5,8 @@ public class practice_01 {
             {  6,  7, 12, -5, 5,  3, 11, 3 },
             { -8, 10, 14,  9, 7, 13,  8, 5 },
             { 11, 12,  7,  4, 8, -2,  9, 4 }};
+	
+	static int[][] sum=new int[8][5];
 
     static boolean 인접가능패턴(int 패턴1, int 패턴2) {
         if (패턴1 == 패턴2) return false; // 동일한 패턴은 인접할 수 없다.
@@ -15,8 +17,9 @@ public class practice_01 {
         return true;
     }
 
+    static int count=0;
+    
     static int 열_점수(int c, int p) throws Exception {
-    	System.out.println("열 점수("+c+", "+p+")");
         switch (p) {
         case 1: return a[0][c]; // 패턴1
         case 2: return a[1][c]; // 패턴2
@@ -27,15 +30,17 @@ public class practice_01 {
     }
 
     static int 전체_점수(int c, int p) throws Exception {
-        if (c == 0) return 열_점수(c, p);
-
+        if(sum[c][p]!=0) return sum[c][p];
+        
+        ++count;
         int 이전열_최고점수 = Integer.MIN_VALUE;
+        if(c==0) return sum[c][p]=열_점수(c,p);
         for (int q = 1; q <= 4; ++q) // q는 c-1 열의 패턴
             if (인접가능패턴(p, q)) {
                 int 점수 = 전체_점수(c - 1, q);
                 if (점수 > 이전열_최고점수) 이전열_최고점수 = 점수;
             }
-        return 이전열_최고점수 + 열_점수(c, p);
+        return sum[c][p]=(이전열_최고점수 + 열_점수(c, p));
     }
 
     static int 전체_점수(int c) throws Exception {
@@ -48,7 +53,8 @@ public class practice_01 {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(전체_점수(7));
+        System.out.println("경로점수 "+전체_점수(7));
+        System.out.println("호출횟수 " + count);
     }
 
 }
