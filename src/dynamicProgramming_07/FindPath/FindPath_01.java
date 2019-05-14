@@ -1,4 +1,4 @@
-package dynamicProgramming_07;
+package dynamicProgramming_07.FindPath;
 
 public class FindPath_01 {
 

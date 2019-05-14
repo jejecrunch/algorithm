@@ -1,4 +1,4 @@
-package dynamicProgramming_07;
+package dynamicProgramming_07.PutStone;
 
 public class PutStone_01 {
 	static int[][] a = {
